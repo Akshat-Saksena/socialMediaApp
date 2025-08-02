@@ -1,22 +1,19 @@
 .bar{
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    //gap: 10px;
-    flex: 1;
     padding: 10px;
-    min-width: 250px;
-    background-color: white;
-    margin: 10px 10px;
     hr{
+        // border: none;
+        // height: 1px;
+        // background-color: gray;
+        // margin: 8px 0;
         border: none;
-        height: 1px;
-        background-color: gray;
-        margin: 8px 0;
+        height: 2px;
+        background-color: grey;
     }
     .container{
-        //border: 1px solid lightgray;
-        padding: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         span{
             font-style: italic;
             font-size: 12px;
@@ -25,7 +22,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            margin-bottom: 5px;
             span{
                 font-size: 18px;
                 font-style: normal;
