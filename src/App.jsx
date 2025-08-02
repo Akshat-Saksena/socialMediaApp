@@ -1,9 +1,42 @@
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Leftbar from "./components/Leftbar/Leftbar";
+import Rightbar from "./components/Rightbar/Rightbar";
+import HomePage from "./components/HomePage/HomePage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import "./app.scss";
+
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 function App() {
+  let Layout = () => {
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Navbar />
+        <div style={{ display: "flex" }}>
+          <Leftbar />
+          <Outlet />
+          <Rightbar />
+        </div>
+      </div>
+    );
+  };
   let router = createBrowserRouter([
+    {
+      path: "/",
+      Component: Layout,
+      children: [
+        {
+          path: "/",
+          Component: HomePage,
+        },
+        {
+          path: "/profile/:id",
+          Component: ProfilePage,
+        },
+      ],
+    },
     {
       path: "/login",
       Component: Login,
@@ -14,7 +47,7 @@ function App() {
     },
   ]);
   return (
-    <div>
+    <div className="mainBackground">
       <RouterProvider router={router} />
     </div>
   );

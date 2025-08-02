@@ -1,0 +1,35 @@
+.bar{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    //gap: 10px;
+    flex: 1;
+    padding: 10px;
+    min-width: 250px;
+    background-color: white;
+    margin: 10px 10px;
+    hr{
+        border: none;
+        height: 1px;
+        background-color: gray;
+        margin: 8px 0;
+    }
+    .container{
+        //border: 1px solid lightgray;
+        padding: 5px;
+        span{
+            font-style: italic;
+            font-size: 12px;
+        }
+        .item{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+            span{
+                font-size: 18px;
+                font-style: normal;
+            }
+        }
+    }
+}
