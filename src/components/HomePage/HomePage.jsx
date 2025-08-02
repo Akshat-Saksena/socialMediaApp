@@ -2,7 +2,31 @@ import "./homepage.scss";
 
 function HomePage() {
   return (
-    <div className="bar">
+    <div className="home">
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
+      <h1>HomePage</h1>
       <h1>HomePage</h1>
     </div>
   );

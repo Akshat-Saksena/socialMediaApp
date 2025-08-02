@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
-.mainBackground{
+.mainBackground, body, #root{
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  background:lightgray;
-  background-size: cover;
-  height: 100vh;
+  background: lightgray;
+  overflow: visible !important;
 }

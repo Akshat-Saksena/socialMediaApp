@@ -1,11 +1,14 @@
 .bar{
     flex: 2;
     padding: 10px;
+    position: sticky;
+    height: calc(100vh - 100px);
+    top: 65px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background: white;
+    border-radius: 10px;
     hr{
-        // border: none;
-        // height: 1px;
-        // background-color: gray;
-        // margin: 8px 0;
         border: none;
         height: 2px;
         background-color: grey;
