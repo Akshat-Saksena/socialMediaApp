@@ -67,30 +67,35 @@ function Rightbar() {
           <div className="account">
             <img src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg" />
             <span>User Name</span>
+            <div className="online" />
           </div>
         </div>
         <div className="item">
           <div className="account">
             <img src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg" />
             <span>User Name</span>
+            <div className="online" />
           </div>
         </div>
         <div className="item">
           <div className="account">
             <img src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg" />
             <span>User Name</span>
+            <div className="online" />
           </div>
         </div>
         <div className="item">
           <div className="account">
             <img src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg" />
             <span>User Name</span>
+            <div className="online" />
           </div>
         </div>
         <div className="item">
           <div className="account">
             <img src="https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg" />
             <span>User Name</span>
+            <div className="online" />
           </div>
         </div>
       </div>

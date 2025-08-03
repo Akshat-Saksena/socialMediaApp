@@ -16,7 +16,15 @@ function App() {
         <Navbar />
         <div style={{ display: "flex" }}>
           <Leftbar />
-          <div style={{ flex: 6 }}>
+          <div
+            style={{
+              flex: 6,
+              // top: "68px",
+              // position: "sticky",
+              // height: "100vh",
+              // overflow: "scroll",
+            }}
+          >
             <Outlet />
           </div>
           <Rightbar />
