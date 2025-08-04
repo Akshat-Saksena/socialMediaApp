@@ -3,6 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background:linear-gradient(rgba(66, 60, 240, 0.326),rgba(186, 186, 209, 0.326)), url("https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg") center;
+    background-size: cover;
     .card{
         display: flex;
         background-color: white;
@@ -55,7 +57,10 @@
                 input{
                     border: none;
                     border-bottom: 1px solid gray;
-                    padding: 10px 5px;
+                    padding: 5px 5px;
+                    margin-bottom: 5px;
+                    font-size: large;
+                    outline: none;
                 }
                 button{
                     margin-top: 10px;

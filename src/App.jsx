@@ -19,10 +19,6 @@ function App() {
           <div
             style={{
               flex: 6,
-              // top: "68px",
-              // position: "sticky",
-              // height: "100vh",
-              // overflow: "scroll",
             }}
           >
             <Outlet />

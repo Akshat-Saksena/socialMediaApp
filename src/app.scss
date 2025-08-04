@@ -4,10 +4,11 @@ body, #root{
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   // background:linear-gradient(rgba(66, 60, 240, 0.326),rgba(186, 186, 209, 0.326)), url("https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg") center;
   // background-size: cover;
-  background: lightgray;
+  background-color: gray;
   background-attachment: fixed;
   height: 100vh;
-  //overflow: visible !important;
+  margin: 0;
+  padding: 0;
 }
 
 .mainBackground{
