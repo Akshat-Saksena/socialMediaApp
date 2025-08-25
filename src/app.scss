@@ -1,16 +1,58 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@use "sass:map";
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 
-body, #root{
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  // background:linear-gradient(rgba(66, 60, 240, 0.326),rgba(186, 186, 209, 0.326)), url("https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg") center;
-  // background-size: cover;
-  background-color: gray;
+body,
+#root {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  background: url("https://r4.wallpaperflare.com/wallpaper/160/748/861/anime-test-patterns-selective-coloring-artwork-wallpaper-b950489dd15a7d0b5697782f202166cd.jpg")
+    center;
+  background-size: cover;
   background-attachment: fixed;
   height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-.mainBackground{
-  
+$themes: (
+  light: (
+    textColor: #000,
+    bg: white,
+    logo: darkblue,
+    bgSoft: #f6f3f3,
+    textColorSoft: #555,
+    border: lightgray,
+  ),
+  dark: (
+    textColor: whitesmoke,
+    bg: #222,
+    logo: white,
+    bgSoft: #333,
+    textColorSoft: lightgray,
+    border: #444,
+  ),
+);
+
+$theme-map: null;
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map.get(map.get($themes, $theme), $key);
+        $theme-map: map.merge(
+          $map1: $theme-map,
+          $map2: (
+            $key: $value,
+          ),
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map.get($map: $theme-map, $key: $key);
 }

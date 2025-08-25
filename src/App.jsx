@@ -12,7 +12,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 function App() {
   let Layout = () => {
     return (
-      <div>
+      <div className="theme-light">
         <Navbar />
         <div style={{ display: "flex" }}>
           <Leftbar />

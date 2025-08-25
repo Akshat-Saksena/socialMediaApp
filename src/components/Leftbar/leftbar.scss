@@ -1,42 +1,44 @@
-.bar{
-    flex: 2;
+@use "../../app.scss" as app;
+
+.bar {
+  @include app.themify(app.$themes) {
+    flex: 1.5;
     padding: 10px;
     position: sticky;
-    height: calc(100vh - 100px);
-    top: 65px;
-    margin-top: 10px;
+    height: calc(100vh - 75px);
+    top: 50px;
     margin-right: 10px;
-    margin-left: 10px;
-    background: white;
-    border-radius: 10px;
-    overflow: scroll;
+    background: app.themed(bg);
+    color: app.themed(textColorSoft);
+    word-wrap: break-word;
 
-    box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
 
-    hr{
-        border: none;
-        height: 2px;
-        background-color: grey;
+    hr {
+      border: none;
+      height: 2px;
+      background-color: grey;
     }
-    .container{
-        padding: 10px;
+    .container {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      span {
+        font-style: italic;
+        font-size: 12px;
+      }
+      .item {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        span{
-            font-style: italic;
-            font-size: 12px;
+        align-items: center;
+        gap: 5px;
+        span {
+          font-size: 18px;
+          font-style: normal;
         }
-        .item{
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            span{
-                font-size: 18px;
-                font-style: normal;
-            }
-        }
+      }
     }
+  }
 }

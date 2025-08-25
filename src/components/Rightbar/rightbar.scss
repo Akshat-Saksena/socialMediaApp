@@ -1,4 +1,7 @@
-.rbar{
+@use "../../app.scss" as app;
+
+.rbar {
+  @include app.themify(app.$themes) {
     flex: 3;
     display: flex;
     flex-direction: column;
@@ -11,79 +14,79 @@
     margin-right: 10px;
     overflow: scroll;
 
-    .container{
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
+      background: app.themed(bg);
+      color: app.themed(textColorSoft);
+      border-radius: 10px;
+      box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+
+      span {
+        font-size: 12px;
+        font-style: italic;
+        margin-bottom: 2px;
+      }
+      .item {
         display: flex;
-        flex-direction: column;
-        gap: 5px;
-        padding: 10px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
-        -webkit-box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 49px -12px rgba(0,0,0,0.75);
-
-
-        span{
-            font-size: 12px;
-            font-style: italic;
-            margin-bottom: 2px;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          font-size: 12px;
+          //text-align: left;
         }
-        .item{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            p{
-                font-size: 12px;
-                //text-align: left;
-            }
-            .account{
-                display: flex;
-                gap: 5px;
-                align-items: center;
-                position: relative;
-                img{
-                    height: 30px;
-                    width: 30px;
-                    border-radius: 50%;
-                }
-                span{
-                    font-style:normal;
-                    font-weight: bold;
-                    font-size: 14px;
-                    color: black;
-                }
-                .online{
-                    height: 10px;
-                    width: 10px;
-                    border-radius: 50%;
-                    background-color: limegreen;
-                    position: absolute;
-                    top: 0;
-                    left: 20px;
-                }
-            }
-
-            .respond{
-                display: flex;
-                gap: 5px;
-                align-items: center;
-                padding: 2px;
-                :first-child{
-                    background-color: blue;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 4px;
-                }
-                :last-child{
-                    background-color: red;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 4px;
-                }
-            }
-
+        .account {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          position: relative;
+          img {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+          }
+          span {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            color: app.themed(textColor);
+          }
+          .online {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: limegreen;
+            position: absolute;
+            top: 0;
+            left: 20px;
+          }
         }
+
+        .respond {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          padding: 2px;
+          :first-child {
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 4px;
+          }
+          :last-child {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 4px;
+          }
+        }
+      }
     }
+  }
 }
