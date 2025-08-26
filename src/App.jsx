@@ -8,11 +8,15 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import "./app.scss";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { useContext } from "react";
+import { ModeContext } from "./contexts/darkModeContext";
 
 function App() {
+  const { darkMode } = useContext(ModeContext);
+
   let Layout = () => {
     return (
-      <div className="theme-light">
+      <div className={"theme-" + (darkMode ? "dark" : "light")}>
         <Navbar />
         <div style={{ display: "flex" }}>
           <Leftbar />
@@ -53,7 +57,7 @@ function App() {
     },
   ]);
   return (
-    <div className="mainBackground">
+    <div>
       <RouterProvider router={router} />
     </div>
   );
