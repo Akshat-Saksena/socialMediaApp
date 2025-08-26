@@ -8,13 +8,20 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import "./app.scss";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ModeContext } from "./contexts/darkModeContext";
 
 function App() {
-  const { darkMode } = useContext(ModeContext);
-
   let Layout = () => {
+    const { darkMode } = useContext(ModeContext);
+
+    useEffect(() => {
+      document.body.className = "theme-" + (darkMode ? "dark" : "light");
+      return () => {
+        document.body.className = "";
+      };
+    }, [darkMode]);
+
     return (
       <div className={"theme-" + (darkMode ? "dark" : "light")}>
         <Navbar />
