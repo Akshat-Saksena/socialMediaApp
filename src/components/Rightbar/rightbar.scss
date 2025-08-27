@@ -8,11 +8,14 @@
     gap: 30px;
     margin-top: 10px;
     gap: 10px;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 180px);
     position: sticky;
     top: 65px;
     margin-right: 10px;
     overflow: scroll;
+    box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
 
     .container {
       display: flex;

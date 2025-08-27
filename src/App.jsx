@@ -7,11 +7,19 @@ import HomePage from "./components/HomePage/HomePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import "./app.scss";
 
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { ModeContext } from "./contexts/darkModeContext";
+import { AuthContext } from "./contexts/authContext";
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
+
   let Layout = () => {
     const { darkMode } = useContext(ModeContext);
 
@@ -39,10 +47,22 @@ function App() {
       </div>
     );
   };
-  let router = createBrowserRouter([
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
+
+  const router = createBrowserRouter([
     {
       path: "/",
-      Component: Layout,
+      element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: "/",
@@ -63,6 +83,7 @@ function App() {
       Component: Register,
     },
   ]);
+
   return (
     <div>
       <RouterProvider router={router} />

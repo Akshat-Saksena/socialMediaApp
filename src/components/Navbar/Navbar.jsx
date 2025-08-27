@@ -10,9 +10,11 @@ import { Link } from "react-router-dom";
 import "./navbar.scss";
 import { useContext } from "react";
 import { ModeContext } from "../../contexts/darkModeContext.jsx";
+import { AuthContext } from "../../contexts/authContext.jsx";
 
 function Navbar() {
   const { darkMode, toggle } = useContext(ModeContext);
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="left">
@@ -36,8 +38,8 @@ function Navbar() {
         <EmailIcon />
         <NotificationsIcon />
         <div className="account">
-          <img src="https://c4.wallpaperflare.com/wallpaper/329/713/280/funny-business-internet-computer-wallpaper-preview.jpg" />
-          <span>User Name</span>
+          <img src={currentUser.profilePic} />
+          <span>{currentUser.name}</span>
         </div>
       </div>
     </div>

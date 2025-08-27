@@ -25,14 +25,14 @@
       }
       .search {
         display: flex;
-        border-left: 2px solid gray;
+        border-left: 2px solid app.themed(border);
         padding-left: 10px;
         gap: 2px;
         input {
           background: app.themed(bg);
           color: app.themed(textColor);
           border: none;
-          border-bottom: 2px solid gray;
+          border-bottom: 2px solid app.themed(border);
           outline: none;
           width: 200px;
           font-size: 15px;
@@ -48,12 +48,12 @@
         gap: 5px;
         align-items: center;
         padding-left: 10px;
-        border-left: 1px solid gray;
+        border-left: 1px solid app.themed(border);
         img {
           height: 40px;
           width: 40px;
           border-radius: 50%;
-          border: 1px solid black;
+          border: 1px solid app.themed(border);
         }
         span {
           font-style: italic;

@@ -15,13 +15,17 @@ import {
   SchoolOutlined,
   ScienceOutlined,
 } from "@mui/icons-material";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/authContext";
+
 function Leftbar() {
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="bar">
       <div className="container">
         <div className="item">
           <AccountCircleIcon />
-          <span>Username</span>
+          <span>{currentUser.name}</span>
         </div>
         <div className="item">
           <Diversity1Icon />
