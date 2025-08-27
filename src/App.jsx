@@ -1,10 +1,10 @@
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Leftbar from "./components/Leftbar/Leftbar";
 import Rightbar from "./components/Rightbar/Rightbar";
-import HomePage from "./components/HomePage/HomePage";
-import ProfilePage from "./components/ProfilePage/ProfilePage";
+import HomePage from "./pages/HomePage/HomePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import "./app.scss";
 
 import {
