@@ -53,7 +53,8 @@
           height: 40px;
           width: 40px;
           border-radius: 50%;
-          border: 1px solid app.themed(border);
+          border: 2px solid app.themed(border);
+          object-fit: cover;
         }
         span {
           font-style: italic;

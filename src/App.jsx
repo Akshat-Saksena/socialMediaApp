@@ -37,7 +37,7 @@ function App() {
           <Leftbar />
           <div
             style={{
-              flex: 6,
+              flex: "6",
             }}
           >
             <Outlet />

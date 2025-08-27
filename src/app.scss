@@ -28,7 +28,6 @@ $theme-map: null;
       $theme-map: () !global;
       @each $key, $submap in $map {
         $value: map.get(map.get($themes, $theme), $key);
-        @debug "Theme: #{$theme}, Key: #{$key}, Value: #{$value}";
         $theme-map: map.merge(
           $map1: $theme-map,
           $map2: (
@@ -49,6 +48,7 @@ $theme-map: null;
 body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
   background-size: cover;
@@ -59,6 +59,8 @@ body {
 
 body.theme-light {
   background-image: url("https://r4.wallpaperflare.com/wallpaper/975/547/822/drawing-doodle-wallpaper-9960d89d61aafdeb66b7f89f10c1c63d.jpg");
+  background-color: rgba(128, 128, 128, 0.15);
+  background-blend-mode: multiply;
 }
 body.theme-dark {
   background-image: url("https://r4.wallpaperflare.com/wallpaper/160/748/861/anime-test-patterns-selective-coloring-artwork-wallpaper-b950489dd15a7d0b5697782f202166cd.jpg");
@@ -66,4 +68,5 @@ body.theme-dark {
 
 #root {
   height: 100vh;
+  width: 100vw;
 }
