@@ -1,9 +1,2 @@
-@use "../../app.scss" as app;
-
 .home {
-  h1 {
-    @include app.themify(app.$themes) {
-      color: app.themed(textColor);
-    }
-  }
 }

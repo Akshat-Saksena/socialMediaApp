@@ -2,13 +2,13 @@
 
 .bar {
   @include app.themify(app.$themes) {
-    flex: 1.5;
+    flex: 1;
     padding: 10px;
     position: sticky;
     height: calc(100vh - 75px);
     top: 50px;
     margin-right: 10px;
-    background: app.themed(bg);
+    background: app.themed(bgSoft);
     color: app.themed(textColorSoft);
     word-wrap: break-word;
 
