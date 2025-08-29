@@ -1,0 +1,101 @@
+@use "../../app.scss" as app;
+
+.profile {
+  @include app.themify(app.$themes) {
+    margin-top: 5px;
+    margin-right: 10px;
+
+    .images {
+      position: relative;
+      width: 60vw;
+      height: 40vh;
+      .cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .profilePic {
+        width: 125px;
+        height: 125px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 28vh;
+        border: 5px solid app.themed(textColorSoft);
+      }
+    }
+
+    .profileContainer {
+      background-color: app.themed(bg);
+      color: app.themed(textColor);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 15vh;
+      padding: 30px 10px;
+      padding-top: 45px;
+      border-radius: 20px;
+      margin: 10px 30px;
+      box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+
+      .left {
+        flex: 1;
+        display: flex;
+        gap: 5px;
+        a {
+          text-decoration: none;
+          color: app.themed(textColorSoft);
+        }
+      }
+      .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        span {
+          font-size: 30px;
+          font-weight: 500;
+        }
+
+        .info {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          width: 100%;
+          .item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: app.themed(textColorSoft);
+            span {
+              font-size: 12px;
+            }
+          }
+        }
+
+        button {
+          border: none;
+          background-color: #5271ff;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+      .right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+    }
+  }
+}
