@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+package-lock.json
+
+# environment variables
+.env
+
+# logs
+logs
+*.log
+
+# runtime files
+tmp
+dist
+build
+
+# system
+.DS_Store
