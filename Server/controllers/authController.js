@@ -11,12 +11,12 @@ export const login = async (req, res) => {
 
     const isCorrect = await bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Invalid username or password" });
     }
 
     const token = jwt.sign({ _id: user._id }, "secretKey"); //create env file and hide the secretKey as a variable there.
 
-    const { password, ...rest } = user;
+    const { _id, password, ...rest } = user;
     res
       .cookie("accessToken", token, {
         httpOnly: true,
@@ -55,7 +55,7 @@ export const register = async (req, res) => {
       console.log("Could not register --- Duplicate UserName");
       return res.status(400).json({
         message: "Registration failed",
-        error: "UserName already exists",
+        error: "User name already exists",
       });
     }
     res.status(400).json({ message: "Registration failed", error: err });

@@ -1,13 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 function Login() {
   const { login } = useContext(AuthContext);
+  const [input, setInput] = useState({
+    userName: "",
+    password: "",
+  });
+  const [err, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(input);
+      toast.success("Login Successfull");
+      navigate("/");
+    } catch (err) {
+      toast.error("Login Failed");
+      setError(err.response.data);
+    }
+  };
+
+  const handleChange = (e) => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -28,8 +51,19 @@ function Login() {
         <div className="right">
           <h1>Login</h1>
           <form>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
+            <input
+              name="userName"
+              type="text"
+              placeholder="Username"
+              onChange={handleChange}
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            {err && <p style={{ color: "red" }}>{err.message}</p>}
             <button onClick={handleLogin}>Login</button>
           </form>
         </div>

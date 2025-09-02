@@ -1,80 +1,92 @@
-.register{
-    height: 100vh;
+.register {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(66, 60, 240, 0.326),
+      rgba(186, 186, 209, 0.326)
+    ),
+    url("https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg")
+      center;
+  background-size: cover;
+  .card {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background:linear-gradient(rgba(66, 60, 240, 0.326),rgba(186, 186, 209, 0.326)), url("https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg") center;
-    background-size: cover;
-    .card{
-        display: flex;
-        background-color: white;
+    background-color: white;
+    width: 50%;
+    border-radius: 10px;
+    min-height: 500px;
+    overflow: hidden;
+    .right {
+      flex: 1;
+      background: linear-gradient(
+          rgba(39, 211, 165, 0.348),
+          rgba(40, 35, 193, 0.533)
+        ),
+        url("https://r4.wallpaperflare.com/wallpaper/254/599/664/bridge-forest-minimalism-minimalist-wallpaper-a8e6dd9860501cb8904cf18e383294ea.jpg")
+          center;
+      background-size: cover;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: white;
+      h1 {
+        font-size: 80px;
+        line-height: 70px;
+      }
+      p {
+        text-align: left;
+      }
+      span {
+        font-size: 14px;
+        //margin-left: 50%;
+      }
+      button {
+        align-self: flex-end;
         width: 50%;
-        border-radius: 10px;
-        min-height: 500px;
-        overflow: hidden;
-        .right{
-            flex: 1;
-            background:linear-gradient(rgba(39, 211, 165, 0.348),rgba(40, 35, 193, 0.533)), url("https://r4.wallpaperflare.com/wallpaper/254/599/664/bridge-forest-minimalism-minimalist-wallpaper-a8e6dd9860501cb8904cf18e383294ea.jpg") center;
-            background-size: cover;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            color: white;
-            h1{
-                font-size: 80px;
-                line-height: 70px;
-            }
-            p{
-                text-align: left;
-            }
-            span{
-                font-size: 14px;
-                //margin-left: 50%;
-            }
-            button{
-                align-self: flex-end;
-                width: 50%;
-                padding: 8px;
-                border: none;
-                background-color: white;
-                font-weight: bold;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        }
-        .left{
-            flex: 1;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            h1{color: rgb(46, 46, 46);}
-            form{
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                input{
-                    border: none;
-                    border-bottom: 1px solid gray;
-                    padding: 5px 5px;
-                    margin-bottom: 5px;
-                    font-size: large;
-                    outline: none;
-                }
-                button{
-                    margin-top: 10px;
-                    width: 50%;
-                    align-self: flex-start;
-                    border: none;
-                    padding: 8px;
-                    background-color: blue;
-                    color: white;
-                    border-radius: 5px;
-                    font-weight: bold;
-                    cursor: pointer;
-                }
-            }
-        }
+        padding: 8px;
+        border: none;
+        background-color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     }
+    .left {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h1 {
+        color: rgb(46, 46, 46);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        input {
+          border: none;
+          border-bottom: 1px solid gray;
+          padding: 5px 5px;
+          margin-bottom: 5px;
+          font-size: large;
+          outline: none;
+        }
+        button {
+          margin-top: 0px;
+          width: 50%;
+          align-self: flex-start;
+          border: none;
+          padding: 8px;
+          background-color: blue;
+          color: white;
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

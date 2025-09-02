@@ -6,6 +6,7 @@ import Rightbar from "./components/Rightbar/Rightbar";
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import "./app.scss";
+import { ToastContainer } from "react-toastify";
 
 import {
   createBrowserRouter,
@@ -86,6 +87,7 @@ function App() {
 
   return (
     <div>
+      <ToastContainer position="top-center" autoClose={2000} theme="colored" />
       <RouterProvider router={router} />
     </div>
   );
