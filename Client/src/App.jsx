@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import "./app.scss";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import {
   createBrowserRouter,
@@ -31,21 +32,25 @@ function App() {
       };
     }, [darkMode]);
 
+    const queryClient = new QueryClient();
+
     return (
-      <div className={"theme-" + (darkMode ? "dark" : "light")}>
-        <Navbar />
-        <div style={{ display: "flex" }}>
-          <Leftbar />
-          <div
-            style={{
-              flex: "6",
-            }}
-          >
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className={"theme-" + (darkMode ? "dark" : "light")}>
+          <Navbar />
+          <div style={{ display: "flex" }}>
+            <Leftbar />
+            <div
+              style={{
+                flex: "6",
+              }}
+            >
+              <Outlet />
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
         </div>
-      </div>
+      </QueryClientProvider>
     );
   };
 

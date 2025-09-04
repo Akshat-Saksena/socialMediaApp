@@ -22,12 +22,14 @@
       align-items: center;
       .userInfo {
         display: flex;
+        align-items: center;
         gap: 5px;
         img {
           height: 40px;
           width: 40px;
           border-radius: 50%;
           object-fit: cover;
+          border: 2px solid app.themed(border);
         }
         .details {
           display: flex;

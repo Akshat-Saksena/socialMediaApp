@@ -21,15 +21,15 @@ const Post = ({ post }) => {
     <div className="post">
       <div className="user">
         <div className="userInfo">
-          <Link to={"./profile/" + post.userId}>
-            <img src={post.profilePic} />
+          <Link to={"./profile/" + post.user._id}>
+            <img src={post.user.profilePic} />
           </Link>
           <div className="details">
             <Link
-              to={"/profile/" + post.userId}
+              to={"/profile/" + post.user._id}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <span className="name">{post.name}</span>
+              <span className="name">{post.user.name}</span>
             </Link>
             <span className="date">1 min ago</span>
           </div>

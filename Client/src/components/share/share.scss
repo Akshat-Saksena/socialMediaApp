@@ -1,0 +1,81 @@
+@use "../../app.scss" as app;
+
+.share {
+  @include app.themify(app.$themes) {
+    position: sticky;
+    top: 8vh;
+    background-color: app.themed(bg);
+    color: app.themed(textColor);
+    margin-bottom: 40px;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
+
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid app.themed(border);
+      }
+      textarea {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        padding: 20px 10px;
+        color: app.themed(textColor);
+        resize: none;
+      }
+    }
+    .bottom {
+      border-top: 2px solid app.themed(border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .left {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 20px;
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          cursor: pointer;
+          span {
+            font-size: 12px;
+            color: app.themed(textColorSoft);
+          }
+        }
+      }
+      .right {
+        button {
+          width: 80px;
+          height: 40px;
+          margin-top: 10px;
+          border: none;
+          padding: 5px;
+          color: white;
+          cursor: pointer;
+          background-color: #5271ff;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
