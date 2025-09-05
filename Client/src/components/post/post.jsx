@@ -1,12 +1,10 @@
 import {
-  Favorite,
   FavoriteBorderOutlined,
   FavoriteOutlined,
   MoreHoriz,
   ShareOutlined,
   Textsms,
   TextsmsOutlined,
-  TextsmsTwoTone,
 } from "@mui/icons-material";
 import "./post.scss";
 import { Link } from "react-router-dom";
