@@ -43,7 +43,9 @@
       display: flex;
       gap: 10px;
       align-items: center;
+      position: relative;
       .account {
+        cursor: pointer;
         display: flex;
         gap: 5px;
         align-items: center;
@@ -58,6 +60,48 @@
         }
         span {
           font-style: italic;
+        }
+      }
+      .dropDown {
+        position: absolute;
+        top: 50px;
+        right: 0px;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: app.themed(bg);
+        color: app.themed(textColor);
+        padding: 10px;
+        border-radius: 10px;
+        animation: dropDownAni 0.1s linear normal forwards;
+        button {
+          border: none;
+          width: 100%;
+          height: 40px;
+          border-radius: 20px;
+          cursor: pointer;
+          &:first-child {
+            background-color: red;
+            color: white;
+            font-size: 18px;
+          }
+          &:last-child {
+            background-color: app.themed(textColorSoft);
+            color: app.themed(bg);
+            font-size: 18px;
+          }
+        }
+
+        @keyframes dropDownAni {
+          from {
+            transform: translateY(-20px);
+          }
+          to {
+            transform: translateY(0);
+          }
         }
       }
     }

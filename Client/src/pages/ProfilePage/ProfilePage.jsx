@@ -7,17 +7,19 @@ import {
   MoreVert,
   Pinterest,
   Place,
-  PlaceOutlined,
   X,
 } from "@mui/icons-material";
 import "./profilePage.scss";
 import Posts from "../../components/posts/posts";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../contexts/authContext";
 
 function ProfilePage() {
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });
   }, []);
+
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div className="profile">
@@ -52,11 +54,11 @@ function ProfilePage() {
           </a>
         </div>
         <div className="center">
-          <span>John Doe</span>
+          <span>{currentUser.name}</span>
           <div className="info">
             <div className="item">
               <Place />
-              <span>SAMANA</span>
+              <span>{currentUser.city}</span>
             </div>
             <div className="item">
               <Language />

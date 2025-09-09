@@ -6,15 +6,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navbar.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ModeContext } from "../../contexts/darkModeContext.jsx";
 import { AuthContext } from "../../contexts/authContext.jsx";
 
 function Navbar() {
   const { darkMode, toggle } = useContext(ModeContext);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
+  const [userDropDown, setUserDropDown] = useState(false);
+
+  const navigate = useNavigate();
   return (
     <div className="navbar">
       <div className="left">
@@ -37,10 +40,16 @@ function Navbar() {
         <PersonIcon />
         <EmailIcon />
         <NotificationsIcon />
-        <div className="account">
+        <div className="account" onClick={() => setUserDropDown(!userDropDown)}>
           <img src={currentUser.profilePic} />
           <span>{currentUser.name}</span>
         </div>
+        {userDropDown && (
+          <div className="dropDown">
+            <button onClick={logout}>Logout</button>
+            <button onClick={() => navigate("/profile/:" + 1)}>Profile</button>
+          </div>
+        )}
       </div>
     </div>
   );

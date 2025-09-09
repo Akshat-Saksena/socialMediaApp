@@ -10,6 +10,8 @@ import "./post.scss";
 import { Link } from "react-router-dom";
 import Comments from "../comments/comments";
 import { useState } from "react";
+import moment from "moment";
+import { TimeAgo } from "../../contexts/timeContext";
 
 const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
@@ -29,7 +31,9 @@ const Post = ({ post }) => {
             >
               <span className="name">{post.user.name}</span>
             </Link>
-            <span className="date">1 min ago</span>
+            <span className="date">
+              <TimeAgo timestamp={post.createdAt} />
+            </span>
           </div>
         </div>
         <MoreHoriz />

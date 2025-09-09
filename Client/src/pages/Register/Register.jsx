@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { request } from "../../axios";
 
 function Register() {
   const [input, setInput] = useState({
@@ -26,7 +26,7 @@ function Register() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localHost:8800/api/auth/register", input);
+      await request.post("auth/register", input); //add credentials:false if required
       toast.success("Registration Successfull");
       navigate("/login");
     } catch (err) {
@@ -34,8 +34,6 @@ function Register() {
       setError(err.response.data);
     }
   };
-
-  //console.log(err);
 
   return (
     <div className="register">

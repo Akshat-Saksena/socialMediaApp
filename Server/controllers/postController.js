@@ -66,10 +66,46 @@ export const getPosts = async (req, res) => {
           "user.name": 1,
         },
       },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
     ]);
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: "Something went wrong", error: err });
     console.log(err);
+  }
+};
+
+export const addPost = async (req, res) => {
+  try {
+    const token = req.cookies.accessToken;
+    if (!token) return res.status(400).json("not logged in");
+
+    let currUser;
+    try {
+      const userInfo = jwt.verify(token, "secretKey");
+      currUser = new mongoose.Types.ObjectId(userInfo._id + "");
+    } catch (err) {
+      return res.status(403).json("Token expired");
+    }
+
+    const { userId, createdAt, ...rest } = req.body;
+    const newPost = new Post({
+      ...rest,
+      userId: currUser,
+      createdAt: new Date(),
+    });
+    await newPost.save(newPost);
+
+    const io = req.app.get("io");
+    io.emit("newPost");
+
+    res.status(201).json("Post has been added");
+  } catch (err) {
+    res.status(500).json("Error:" + err);
+    console.log("Error:" + err);
   }
 };
