@@ -13,7 +13,7 @@ export const TimeProvider = ({ children }) => {
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
-    const interval = setInterval(() => setNow(Date.now(), 60000));
+    const interval = setInterval(() => setNow(Date.now()), 60000);
     return () => {
       clearInterval(interval);
     };
