@@ -9,10 +9,10 @@
     margin-bottom: 40px;
     margin-right: 10px;
     border-radius: 20px;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
 
     box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
@@ -21,24 +21,42 @@
     .top {
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: space-between;
       width: 100%;
-      img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid app.themed(border);
+      .left {
+        flex: 6;
+        display: flex;
+        gap: 5px;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid app.themed(border);
+        }
+        textarea {
+          flex: 1;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          font-size: 16px;
+          padding: 10px 10px;
+          color: app.themed(textColor);
+          resize: none;
+        }
       }
-      textarea {
-        flex: 1;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        font-size: 16px;
-        padding: 20px 10px;
-        color: app.themed(textColor);
-        resize: none;
+      .right {
+        flex: 2;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 5px;
+        .file {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 10px;
+        }
       }
     }
     .bottom {
@@ -64,6 +82,9 @@
         }
       }
       .right {
+        margin-left: 10px;
+        display: flex;
+        gap: 10px;
         button {
           width: 80px;
           height: 40px;
@@ -76,12 +97,12 @@
           border-radius: 3px;
 
           .spinner {
-            border: 3px solid white; /* Light grey */
-            border-top: 3px solid black; /* Blue */
+            border: 3px solid white;
+            border-top: 3px solid black;
             border-radius: 50%;
             width: 14px;
             height: 14px;
-            animation: spin 0.8s linear infinite;
+            animation: spin 0.8s ease-in-out infinite;
             display: inline-block;
             margin-left: 6px;
           }
@@ -92,6 +113,10 @@
             100% {
               transform: rotate(360deg);
             }
+          }
+
+          &:last-child {
+            background-color: red;
           }
         }
       }

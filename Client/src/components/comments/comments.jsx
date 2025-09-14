@@ -1,53 +1,86 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./comments.scss";
 import { AuthContext } from "../../contexts/authContext";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { request } from "../../axios";
+import { TimeAgo } from "../../contexts/timeContext";
+import socket from "../../sockets";
+import { toast } from "react-toastify";
 
-const Comments = () => {
+const Comments = ({ postId }) => {
   const { currentUser } = useContext(AuthContext);
+  const [desc, setDesc] = useState(null);
+  const queryClient = useQueryClient();
 
-  const comments = [
-    {
-      id: 1,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum iaculis quam, cursus auctor lorem malesuada sit amet.",
-      name: "John Doe",
-      userId: 1,
-      profilePic:
-        "https://r4.wallpaperflare.com/wallpaper/236/33/139/ikari-shinji-eva-unit-01-mech-neon-genesis-evangelion-anime-boys-hd-wallpaper-b72d5041d0273650e911d3021d61022d.jpg",
+  useEffect(() => {
+    socket.on("newComment", ({ postId }) => {
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+    });
+    return () => {
+      socket.off("newComment");
+    };
+  }, [queryClient]);
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["comments", postId],
+    queryFn: async () => {
+      console.log(postId);
+
+      const res = await request.get("/comments", {
+        params: { id: postId },
+      });
+      return res.data;
     },
-    {
-      id: 2,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum iaculis quam, cursus auctor lorem malesuada sit amet.",
-      name: "Jane Doe",
-      userId: 2,
-      profilePic:
-        "https://r4.wallpaperflare.com/wallpaper/995/415/579/4k-superheroes-black-8k-wallpaper-f3cb630d3d891b35cf460217984b8858.jpg",
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (newComment) => {
+      await request.post("/comments", newComment);
     },
-    {
-      id: 3,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum iaculis quam, cursus auctor lorem malesuada sit amet.",
-      name: "Janet Doe",
-      userId: 3,
-      profilePic:
-        "https://r4.wallpaperflare.com/wallpaper/403/855/787/sword-blood-fantasy-armor-wallpaper-d98038ede1ba3dfb264758af0061862d.jpg",
+    onSuccess: () => {
+      setDesc(null);
     },
-  ];
+  });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (!desc) return toast.error("Cannot add empty comment");
+    mutation.mutate({ desc: desc, postId: postId });
+  };
+
   return (
     <div className="comments">
       <div className="write">
         <img src={currentUser.profilePic} />
-        <input type="text" placeholder="write a comment" />
-        <button>Post</button>
+        <textarea
+          value={desc || ""}
+          placeholder="write a comment"
+          onChange={(e) => {
+            setDesc(e.target.value);
+          }}
+        />
+        <button onClick={handleClick} disabled={mutation.isPending}>
+          {mutation.isPending ? <div className="spinner" /> : "Post"}
+        </button>
+        {mutation.isError && (
+          <p style={{ color: "red" }}>{mutation.error.message}</p>
+        )}
       </div>
-      {comments.map((comment) => (
-        <div className="comment">
-          <img src={comment.profilePic} />
-          <div className="details">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
+      {isLoading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>Error:{error.message}</p>}
+      {data &&
+        data.map((comment) => (
+          <div className="comment" key={comment._id}>
+            <img src={comment.userInfo.profilePic} />
+            <div className="details">
+              <span>{comment.userInfo.name}</span>
+              <p>{comment.desc}</p>
+            </div>
+            <span className="date">
+              <TimeAgo timestamp={comment.createdAt} />
+            </span>
           </div>
-          <span className="date">1 min ago</span>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

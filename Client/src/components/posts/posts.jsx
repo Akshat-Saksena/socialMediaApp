@@ -71,7 +71,7 @@ const Posts = () => {
     <TimeProvider>
       <div className="posts">
         {isLoading && <p>Loading...</p>}
-        {error && <p color="red">Error:{error.message}</p>}
+        {error && <p style={{ color: "red" }}>Error:{error.message}</p>}
         {data && data.map((post) => <Post post={post} key={post._id} />)}
       </div>
     </TimeProvider>

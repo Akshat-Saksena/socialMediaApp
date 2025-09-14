@@ -21,16 +21,18 @@
         border-radius: 50%;
         object-fit: cover;
         margin-left: 15px;
-      }
-      input {
-        flex: 5;
-        padding: 10px;
-        background: app.themed(bg);
-        color: app.themed(textColorSoft);
-        border: none;
         border: 2px solid app.themed(border);
+      }
+      textarea {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid app.themed(border);
         outline: none;
         font-size: 15px;
+        padding: 5px 10px;
+        color: app.themed(textColor);
+        resize: none;
       }
       button {
         border: none;
@@ -39,11 +41,29 @@
         padding: 10px;
         cursor: pointer;
         border-radius: 3px;
+
+        .spinner {
+          border: 5px solid white;
+          border-top: 5px solid black;
+          animation: spin infinite ease-in-out 0.8s;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+        }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
       }
     }
 
     .comment {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 10px;
       img {
@@ -51,20 +71,27 @@
         height: 40px;
         border-radius: 50%;
         object-fit: cover;
+        border: 2px solid app.themed(border);
+        flex-shrink: 0;
       }
       .details {
         flex: 5;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        max-width: 70%;
 
         span {
           font-weight: 500;
           line-height: 1;
         }
         p {
+          max-width: 95%;
           font-size: 14px;
           color: app.themed(textColorSoft);
+          word-wrap: break-word;
+          white-space: pre-wrap;
+          flex: 1;
         }
       }
       .date {
@@ -72,8 +99,7 @@
         font-size: 12px;
         font-style: italic;
         color: app.themed(textColorSoft);
-        align-self: center;
-        margin-left: 20px;
+        align-self: flex-start;
       }
     }
   }

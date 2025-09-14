@@ -2,10 +2,12 @@
 
 .post {
   @include app.themify(app.$themes) {
+    align-self: center;
     padding: 20px;
+    width: 85%;
     background: app.themed(bg);
     color: app.themed(textColor);
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     border-radius: 20px;
     display: flex;
@@ -54,6 +56,12 @@
         width: 100%;
         border-radius: 10px;
         object-fit: cover;
+        cursor: pointer;
+      }
+      video {
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
       }
       span {
         margin-left: 5px;
@@ -71,5 +79,28 @@
         font-size: 14px;
       }
     }
+  }
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); // blur background
+  background-color: rgba(0, 0, 0, 0.5); // dark overlay
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+
+  img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
 }

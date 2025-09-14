@@ -98,7 +98,7 @@ export const addPost = async (req, res) => {
       userId: currUser,
       createdAt: new Date(),
     });
-    await newPost.save(newPost);
+    await newPost.save();
 
     const io = req.app.get("io");
     io.emit("newPost");

@@ -10,12 +10,12 @@ import "./post.scss";
 import { Link } from "react-router-dom";
 import Comments from "../comments/comments";
 import { useState } from "react";
-import moment from "moment";
 import { TimeAgo } from "../../contexts/timeContext";
 
 const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="post">
@@ -40,7 +40,17 @@ const Post = ({ post }) => {
       </div>
       <div className="content">
         <span>{post.desc}</span>
-        <img src={post.img} />
+        {post.img &&
+          (post.img.endsWith(".mp4") || post.img.endsWith(".mkv") ? (
+            <video src={post.img} controls />
+          ) : (
+            <img src={post.img} onClick={() => setExpanded(true)} />
+          ))}
+        {expanded && (
+          <div className="lightbox" onClick={() => setExpanded(false)}>
+            <img src={post.img} alt="expanded" />
+          </div>
+        )}
       </div>
       <div className="info">
         <div className="item" onClick={() => setLiked(!liked)}>
@@ -56,7 +66,7 @@ const Post = ({ post }) => {
           Share
         </div>
       </div>
-      {commentOpen && <Comments />}
+      {commentOpen && <Comments postId={post._id} />}
     </div>
   );
 };
