@@ -9,13 +9,65 @@ import {
 import "./post.scss";
 import { Link } from "react-router-dom";
 import Comments from "../comments/comments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TimeAgo } from "../../contexts/timeContext";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { request } from "../../axios";
+import socket from "../../sockets";
 
 const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["likes", post._id],
+    queryFn: async () => {
+      const res = await request.get("/likes", {
+        params: { id: post._id },
+      });
+      if (res.data.liked) setLiked(true);
+      return res.data.number;
+    },
+  });
+
+  const likeMutation = useMutation({
+    mutationFn: async (newLike) => {
+      await request.post("/likes", newLike);
+    },
+    onSuccess: () => {
+      setLiked(true);
+    },
+  });
+
+  const disMutation = useMutation({
+    mutationFn: async () => {
+      await request.delete("/likes", {
+        params: { id: post._id },
+      });
+    },
+    onSuccess: () => {
+      setLiked(false);
+    },
+  });
+
+  useEffect(() => {
+    socket.on("changeLike", (postId) => {
+      queryClient.invalidateQueries({ queryKey: ["likes", postId] });
+    });
+    return () => {
+      socket.off("changeLike");
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (liked) {
+      disMutation.mutate();
+    } else {
+      likeMutation.mutate({ postId: post._id });
+    }
+  };
 
   return (
     <div className="post">
@@ -53,13 +105,17 @@ const Post = ({ post }) => {
         )}
       </div>
       <div className="info">
-        <div className="item" onClick={() => setLiked(!liked)}>
-          {liked ? <FavoriteOutlined /> : <FavoriteBorderOutlined />}
-          12 Likes
+        <div className="item" onClick={handleClick}>
+          {liked ? (
+            <FavoriteOutlined style={{ color: "red" }} />
+          ) : (
+            <FavoriteBorderOutlined />
+          )}
+          {isLoading ? "Loading..." : (data ? data : 0) + " Likes"}
         </div>
         <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
           {commentOpen ? <Textsms /> : <TextsmsOutlined />}
-          12 Comments
+          Comments
         </div>
         <div className="item">
           <ShareOutlined />

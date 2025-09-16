@@ -29,7 +29,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/comment", commentRoute);
-app.use("/api/like", likesRoute);
+app.use("/api/likes", likesRoute);
 app.use("/api/upload", fileUpload);
 app.use("/api/comments", commentRoute);
 
