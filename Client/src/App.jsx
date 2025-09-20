@@ -75,7 +75,7 @@ function App() {
           Component: HomePage,
         },
         {
-          path: "/profile/:id",
+          path: "/profile/:userName",
           Component: ProfilePage,
         },
       ],

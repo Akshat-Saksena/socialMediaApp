@@ -13,66 +13,75 @@ import "./profilePage.scss";
 import Posts from "../../components/posts/posts";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import { useQuery } from "@tanstack/react-query";
+import { request } from "../../axios";
+import { useParams } from "react-router-dom";
 
 function ProfilePage() {
+  const { currentUser } = useContext(AuthContext);
+  const { userName } = useParams();
+
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });
-  }, []);
+  }, [userName]);
 
-  const { currentUser } = useContext(AuthContext);
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["profile", userName],
+    queryFn: async () => {
+      const res = await request.get("/user/profile/" + userName);
+      console.log(res.data);
+      return res.data;
+    },
+  });
 
   return (
     <div className="profile">
       <div className="images">
-        <img
-          src="https://r4.wallpaperflare.com/wallpaper/236/33/139/ikari-shinji-eva-unit-01-mech-neon-genesis-evangelion-anime-boys-hd-wallpaper-b72d5041d0273650e911d3021d61022d.jpg"
-          alt=""
-          className="cover"
-        />
-        <img
-          src="https://c4.wallpaperflare.com/wallpaper/764/505/66/baby-groot-4k-hd-superheroes-wallpaper-preview.jpg"
-          alt=""
-          className="profilePic"
-        />
+        <img src={data && data.coverPic} alt="" className="cover" />
+        <img src={data && data.profilePic} alt="" className="profilePic" />
       </div>
       <div className="profileContainer">
         <div className="left">
           <a href="http://facebook.com">
             <FacebookTwoTone fontSize="large" />
           </a>
-          <a href="http://facebook.com">
+          <a href={data && data.webSite}>
             <Instagram fontSize="large" />
           </a>
-          <a href="http://facebook.com">
+          <a href="http://x.com">
             <X fontSize="large" />
           </a>
-          <a href="http://facebook.com">
+          <a href="http://linkedin.com">
             <LinkedIn fontSize="large" />
           </a>
-          <a href="http://facebook.com">
+          <a href="http://pinterest.com">
             <Pinterest fontSize="large" />
           </a>
         </div>
         <div className="center">
-          <span>{currentUser.name}</span>
+          <span>{data && data.name}</span>
           <div className="info">
             <div className="item">
               <Place />
-              <span>{currentUser.city}</span>
+              <span>{data && data.city}</span>
             </div>
             <div className="item">
               <Language />
               <span>Engilsh</span>
             </div>
           </div>
-          <button>Follow</button>
+          {currentUser.userName === userName ? (
+            <button>Update</button>
+          ) : (
+            <button>Follow</button>
+          )}
         </div>
         <div className="right">
           <Email />
           <MoreVert />
         </div>
       </div>
-      <Posts />
+      <Posts userName={userName} />
     </div>
   );
 }

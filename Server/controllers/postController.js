@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { Post } from "../models/postModel.js";
 import { Relation } from "../models/relationModel.js";
 import jwt from "jsonwebtoken";
+import { User } from "../models/userModel.js";
 
 export const getPosts = async (req, res) => {
   try {
@@ -61,9 +62,9 @@ export const getPosts = async (req, res) => {
           desc: 1,
           img: 1,
           createdAt: 1,
-          "user._id": 1,
           "user.profilePic": 1,
           "user.name": 1,
+          "user.userName": 1,
         },
       },
       {
@@ -107,5 +108,50 @@ export const addPost = async (req, res) => {
   } catch (err) {
     res.status(500).json("Error:" + err);
     console.log("Error:" + err);
+  }
+};
+
+export const getUserPosts = async (req, res) => {
+  try {
+    const user_name = req.params.userName;
+    if (!user_name) return res.status(400).json("User not passed");
+
+    const user = await User.findOne({ userName: user_name }).lean();
+    if (!user) return res.status(500).json("user does not exists");
+
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          userId: user._id,
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          desc: 1,
+          img: 1,
+          createdAt: 1,
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+    ]);
+
+    const postsWithUser = posts.map((post) => ({
+      ...post,
+      user: {
+        profilePic: user.profilePic,
+        name: user.name,
+        userName: user.userName,
+      },
+    }));
+
+    res.status(200).json(postsWithUser);
+  } catch (err) {
+    console.log("\nError: " + err + "\n");
+    res.status(400).json(err.message);
   }
 };

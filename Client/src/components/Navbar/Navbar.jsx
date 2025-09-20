@@ -47,7 +47,11 @@ function Navbar() {
         {userDropDown && (
           <div className="dropDown">
             <button onClick={logout}>Logout</button>
-            <button onClick={() => navigate("/profile/:" + 1)}>Profile</button>
+            <button
+              onClick={() => navigate("/profile/" + currentUser.userName)}
+            >
+              Profile
+            </button>
           </div>
         )}
       </div>
