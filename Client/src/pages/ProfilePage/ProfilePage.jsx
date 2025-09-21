@@ -13,13 +13,14 @@ import "./profilePage.scss";
 import Posts from "../../components/posts/posts";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/authContext";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "../../axios";
 import { useParams } from "react-router-dom";
 
 function ProfilePage() {
   const { currentUser } = useContext(AuthContext);
   const { userName } = useParams();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });
@@ -33,6 +34,31 @@ function ProfilePage() {
       return res.data;
     },
   });
+
+  const { isLoading: status, data: following } = useQuery({
+    queryKey: ["isFollowing"],
+    queryFn: async () => {
+      const res = await request.get("/relation/status", {
+        params: { id: userName },
+      });
+      return res.data;
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (body) => {
+      if (following) await request.post("/relation/unFollow", body);
+      else await request.post("/relation/follow", body);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["isFollowing"] });
+    },
+  });
+
+  const handleFollow = (e) => {
+    e.preventDefault();
+    mutation.mutate({ id: userName });
+  };
 
   return (
     <div className="profile">
@@ -73,7 +99,9 @@ function ProfilePage() {
           {currentUser.userName === userName ? (
             <button>Update</button>
           ) : (
-            <button>Follow</button>
+            <button onClick={handleFollow}>
+              {status ? "Loading" : following ? "Following" : "Follow"}
+            </button>
           )}
         </div>
         <div className="right">

@@ -3,11 +3,11 @@ import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
 import commentRoute from "./routes/commentRoute.js";
 import likesRoute from "./routes/likesRoute.js";
+import relationRoute from "./routes/relationsRoute.js";
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import fileUpload from "./routes/fileRoute.js";
-import path from "path";
 
 const app = express();
 app.use(express.json());
@@ -32,6 +32,7 @@ app.use("/api/comment", commentRoute);
 app.use("/api/likes", likesRoute);
 app.use("/api/upload", fileUpload);
 app.use("/api/comments", commentRoute);
+app.use("/api/relation", relationRoute);
 
 app.use("/uploads", express.static("./uploads"));
 
