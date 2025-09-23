@@ -39,7 +39,7 @@ const Share = () => {
       toast.error("Cannot post an empty post");
       return;
     }
-    let imgUrl = "";
+    let imgUrl;
     if (file) imgUrl = await upload();
     mutation.mutate({ desc: desc, img: imgUrl });
   };

@@ -1,8 +1,6 @@
 import { User } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
-import path from "path";
-import fs from "fs/promises";
-import { fileURLToPath } from "url";
+import deleteFile from "../deleteFile.js";
 
 export const getUser = async (req, res) => {
   try {
@@ -29,14 +27,10 @@ export const updateUser = async (req, res) => {
     try {
       const userInfo = jwt.verify(token, "secretKey");
       currentUser = await User.findById(userInfo._id).lean();
-      console.log(currentUser + "\n");
     } catch (err) {
       console.log("\nError : " + err + "\n");
       return res.status(400).json("token expired");
     }
-
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
 
     if (req.body.profilePic && currentUser.profilePic) {
       await deleteFile(currentUser.profilePic);
@@ -62,22 +56,5 @@ export const updateUser = async (req, res) => {
   } catch (err) {
     console.log("\nError : " + err + "\n");
     res.status(500).json(err.message);
-  }
-};
-
-const deleteFile = async (file) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-
-  const fileName = file.split("/uploads/")[1];
-  //console.log("fileName: " + fileName + "\n");
-  if (fileName) {
-    const filePath = path.join(__dirname, "..", "uploads", fileName);
-    //console.log("filePath: " + filePath + "\n");
-    try {
-      await fs.unlink(filePath);
-    } catch (err) {
-      //console.log("File not found:", err.message);
-    }
   }
 };

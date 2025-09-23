@@ -9,16 +9,19 @@ import {
 import "./post.scss";
 import { Link } from "react-router-dom";
 import Comments from "../comments/comments";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { TimeAgo } from "../../contexts/timeContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "../../axios";
 import socket from "../../sockets";
+import { toast } from "react-toastify";
 
 const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -52,6 +55,22 @@ const Post = ({ post }) => {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      await request.delete("/posts", {
+        data: { id: post._id },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Post has been deleted");
+    },
+    onError: (err) => {
+      if (err.response.status === 403)
+        toast.error("You can only Delete your own post");
+      else toast.error("Deletion failed");
+    },
+  });
+
   useEffect(() => {
     socket.on("changeLike", (postId) => {
       queryClient.invalidateQueries({ queryKey: ["likes", postId] });
@@ -67,6 +86,10 @@ const Post = ({ post }) => {
     } else {
       likeMutation.mutate({ postId: post._id });
     }
+  };
+
+  const handleDelete = () => {
+    deleteMutation.mutate();
   };
 
   return (
@@ -88,7 +111,17 @@ const Post = ({ post }) => {
             </span>
           </div>
         </div>
-        <MoreHoriz />
+        <MoreHoriz
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+          }}
+        />
+        {menuOpen && (
+          <button onClick={handleDelete} disabled={deleteMutation.isPending}>
+            {deleteMutation.isPending ? <div className="spinner" /> : "Delete"}
+          </button>
+        )}
       </div>
       <div className="content">
         <span>{post.desc}</span>

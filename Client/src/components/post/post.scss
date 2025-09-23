@@ -19,6 +19,7 @@
     -moz-box-shadow: 0px 0px 49px -12px rgba(0, 0, 0, 0.75);
 
     .user {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -43,6 +44,38 @@
             font-size: 12px;
             font-style: italic;
             color: app.themed(textColorSoft);
+          }
+        }
+      }
+      button {
+        position: absolute;
+        top: 25px;
+        right: 0;
+        width: 80px;
+        height: 40px;
+        margin-top: 10px;
+        border: none;
+        padding: 5px;
+        color: white;
+        cursor: pointer;
+        background-color: red;
+        border-radius: 3px;
+        .spinner {
+          border: 3px solid white;
+          border-top: 3px solid black;
+          border-radius: 50%;
+          width: 14px;
+          height: 14px;
+          animation: spin 0.8s ease-in-out infinite;
+          display: inline-block;
+          margin-left: 6px;
+        }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
           }
         }
       }
