@@ -1,0 +1,120 @@
+@use "../../app.scss" as app;
+
+.backgroundBlur {
+  @include app.themify(app.$themes) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .updateProfile {
+      background-color: app.themed(bg);
+      color: app.themed(textColor);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      width: 80%;
+      max-width: 800px;
+      height: 80%;
+      border-radius: 20px;
+      h1 {
+        align-self: center;
+      }
+      .card {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        border-top: 5px solid app.themed(border);
+        height: 80%;
+
+        .left {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          height: 100%;
+          input {
+            border: none;
+            border-bottom: 2px solid app.themed(border);
+            padding: 5px 10px;
+            outline: none;
+            font-size: large;
+            margin-bottom: 5px;
+            background: transparent;
+            color: app.themed(textColor);
+          }
+          .actions {
+            display: flex;
+            gap: 10px;
+            align-self: flex-end;
+            button {
+              cursor: pointer;
+              padding: 10px;
+              color: white;
+              border-radius: 5px;
+              border: none;
+              font-weight: bold;
+              font-size: 14px;
+              &:first-child {
+                background-color: rgb(43, 43, 246);
+              }
+              &:last-child {
+                background-color: red;
+              }
+              .spinner {
+                border: 3px solid white;
+                border-top: 3px solid black;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px;
+                animation: spin 0.8s ease-in-out infinite;
+                display: inline-block;
+                margin-left: 6px;
+              }
+              @keyframes spin {
+                0% {
+                  transform: rotate(0deg);
+                }
+                100% {
+                  transform: rotate(360deg);
+                }
+              }
+            }
+          }
+        }
+        .right {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-around;
+          padding-top: 10px;
+          width: 100%;
+          height: 100%;
+          gap: 10px;
+          .item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+          }
+          img {
+            border: 2px solid app.themed(border);
+            height: 200px;
+            width: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+  }
+}

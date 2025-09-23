@@ -92,7 +92,12 @@ function App() {
 
   return (
     <div>
-      <ToastContainer position="top-center" autoClose={2000} theme="colored" />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        theme="colored"
+        style={{ zIndex: "999999" }}
+      />
       <RouterProvider router={router} />
     </div>
   );

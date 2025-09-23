@@ -26,7 +26,7 @@ function Register() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await request.post("auth/register", input); //add credentials:false if required
+      await request.post("auth/register", input);
       toast.success("Registration Successfull");
       navigate("/login");
     } catch (err) {

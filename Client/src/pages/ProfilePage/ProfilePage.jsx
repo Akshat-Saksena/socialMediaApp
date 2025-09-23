@@ -11,16 +11,18 @@ import {
 } from "@mui/icons-material";
 import "./profilePage.scss";
 import Posts from "../../components/posts/posts";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { request } from "../../axios";
 import { useParams } from "react-router-dom";
+import UpdateProfile from "../../components/updateProfile/update";
 
 function ProfilePage() {
   const { currentUser } = useContext(AuthContext);
   const { userName } = useParams();
   const queryClient = useQueryClient();
+  const [updateBox, setUpdateBox] = useState(false);
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });
@@ -97,7 +99,13 @@ function ProfilePage() {
             </div>
           </div>
           {currentUser.userName === userName ? (
-            <button>Update</button>
+            <button
+              onClick={() => {
+                setUpdateBox(true);
+              }}
+            >
+              Update
+            </button>
           ) : (
             <button onClick={handleFollow}>
               {status ? "Loading" : following ? "Following" : "Follow"}
@@ -110,6 +118,7 @@ function ProfilePage() {
         </div>
       </div>
       <Posts userName={userName} />
+      {updateBox && <UpdateProfile setUpdateBox={setUpdateBox} />}
     </div>
   );
 }
