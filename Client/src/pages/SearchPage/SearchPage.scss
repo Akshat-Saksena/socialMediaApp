@@ -1,0 +1,43 @@
+@use "../../app.scss" as app;
+
+.SearchPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-right: 10px;
+  height: 100vh;
+  padding-top: 50px;
+  @include app.themify(app.$themes) {
+    .item {
+      display: flex;
+      align-items: center;
+      background-color: app.themed(bg);
+      color: app.themed(textColor);
+      padding: 10px;
+      border-radius: 20px;
+      height: 100px;
+      cursor: pointer;
+      gap: 5px;
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: solid 2px app.themed(border);
+        }
+        span.name {
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+      span.userName {
+        font-style: italic;
+        font-size: 15px;
+      }
+    }
+  }
+}

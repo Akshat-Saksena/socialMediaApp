@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import fileUpload from "./routes/fileRoute.js";
+import searchRoute from "./routes/searchRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use("/api/likes", likesRoute);
 app.use("/api/upload", fileUpload);
 app.use("/api/comments", commentRoute);
 app.use("/api/relation", relationRoute);
+app.use("/api/search", searchRoute);
 
 app.use("/uploads", express.static("./uploads"));
 

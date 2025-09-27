@@ -18,6 +18,7 @@
       display: flex;
       gap: 10px;
       align-items: center;
+      flex: 4.5;
       span {
         font-size: 20px;
         font-weight: bold;
@@ -28,22 +29,66 @@
         border-left: 2px solid app.themed(border);
         padding-left: 10px;
         gap: 2px;
+        position: relative;
+        width: 50%;
         input {
           background: app.themed(bg);
           color: app.themed(textColor);
           border: none;
           border-bottom: 2px solid app.themed(border);
           outline: none;
-          width: 200px;
+          width: 100%;
           font-size: 15px;
+        }
+        .suggestions {
+          position: absolute;
+          top: 40px;
+          background-color: app.themed(bg);
+          color: app.themed(textColor);
+          display: flex;
+          flex-direction: column;
+          padding: 10px;
+          gap: 10px;
+          min-width: 100%;
+          border-radius: 20px;
+          .user {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            .info {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              img {
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 1px solid app.themed(border);
+              }
+              span.name {
+                font-size: 16px;
+                color: app.themed(textColor);
+              }
+            }
+            span.userName {
+              font-style: italic;
+              font-weight: lighter;
+              font-size: 14px;
+              color: app.themed(textColor);
+            }
+          }
         }
       }
     }
     .right {
+      flex: 1;
       display: flex;
       gap: 10px;
       align-items: center;
       position: relative;
+
       .account {
         cursor: pointer;
         display: flex;

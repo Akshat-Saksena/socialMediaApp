@@ -9,12 +9,14 @@
       position: relative;
       width: 60vw;
       height: 40vh;
+      background-color: app.themed(bg);
       .cover {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
       .profilePic {
+        background-color: app.themed(bg);
         width: 125px;
         height: 125px;
         border-radius: 50%;

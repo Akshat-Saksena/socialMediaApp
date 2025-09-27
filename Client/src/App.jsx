@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import "./app.scss";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 import {
   createBrowserRouter,
@@ -77,6 +78,10 @@ function App() {
         {
           path: "/profile/:userName",
           Component: ProfilePage,
+        },
+        {
+          path: "/search/full/:query",
+          Component: SearchPage,
         },
       ],
     },
